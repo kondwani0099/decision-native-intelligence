@@ -1,0 +1,35 @@
+{
+  "model": "UDM-125M",
+  "parameters": 100739724,
+  "training_time_sec": 271.89130878448486,
+  "epochs": 3,
+  "overall_accuracy": 0.6666666666666666,
+  "macro_f1": 0.4,
+  "ece": 0.16016197204589844,
+  "brier_score": 0.49599096179008484,
+  "domain_metrics": {
+    "finance": {
+      "accuracy": 0.6666666666666666,
+      "f1": 0.4,
+      "count": 3
+    },
+    "sales": {
+      "accuracy": 0.5555555555555556,
+      "f1": 0.35714285714285715,
+      "count": 9
+    },
+    "inventory": {
+      "accuracy": 0.8333333333333334,
+      "f1": 0.45454545454545453,
+      "count": 6
+    }
+  },
+  "latency_percentiles_ms": {
+    "mean_ms": 174.77266500063706,
+    "p50_ms": 169.05649999534944,
+    "p95_ms": 213.02493001057883,
+    "p99_ms": 217.04882600475685,
+    "throughput_per_sec": 5.721718553621385
+  },
+  "exported_checkpoint_dir": "C:\\Users\\RENOCKS\\Desktop\\gde\\decision-native-intelligence\\checkpoints\\udm_125m_final"
+}
