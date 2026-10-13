@@ -22,8 +22,12 @@ import copy
 from typing import List, Dict, Any, Tuple, Optional
 from pathlib import Path
 
-import torch
-from torch.utils.data import Dataset
+try:
+    import torch
+    from torch.utils.data import Dataset
+except ImportError:
+    torch = None
+    Dataset = object
 
 from .schema import serialize_decision, DOMAIN_OPTIONS, DOMAIN_CONTEXT_FIELDS
 from .tokenizer import DecisionTokenizer
@@ -169,7 +173,7 @@ class DecisionDataset(Dataset):
     def __len__(self) -> int:
         return len(self.scenarios)
 
-    def __getitem__(self, idx: int) -> Tuple[torch.Tensor, torch.Tensor, int, int]:
+    def __getitem__(self, idx: int) -> Tuple[Any, Any, int, int]:
         scenario = self.scenarios[idx]
         domain = scenario["domain"]
         context = scenario["context"]
@@ -212,9 +216,16 @@ class DecisionDataset(Dataset):
         label = LABEL_MAP.get(label_str, 0)
         domain_id = DOMAIN_MAP.get(domain, 0)
 
+        if torch is not None:
+            return (
+                torch.tensor(token_ids, dtype=torch.long),
+                torch.tensor(attention_mask, dtype=torch.long),
+                label,
+                domain_id,
+            )
         return (
-            torch.tensor(token_ids, dtype=torch.long),
-            torch.tensor(attention_mask, dtype=torch.long),
+            token_ids,
+            attention_mask,
             label,
             domain_id,
         )

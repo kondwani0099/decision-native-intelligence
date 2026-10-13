@@ -4,6 +4,8 @@
 *.bin
 *.onnx
 *.safetensors
+*.npz
+*.msgpack
 checkpoints/
 
 # Python Cache & Bytecode
